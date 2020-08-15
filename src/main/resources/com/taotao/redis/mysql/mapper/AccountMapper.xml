@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taotao.redis.mysql.mapper.AccountMapper">
+
+    <update id="addMoney">
+        update account
+        set money = money + #{money, jdbcType=BIGINT}
+        where id = #{userId, jdbcType=VARCHAR}
+    </update>
+
+    <select id="getAccountById" resultType="com.taotao.redis.mysql.entity.Account">
+        select * from account
+        where id = #{userId, jdbcType=VARCHAR}
+    </select>
+
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taotao.redis.mysql.mapper.RedPacketMapper">
+
+    <insert id="addRedPacket" parameterType="com.taotao.redis.mysql.entity.RedPacket">
+        insert into red_packet values
+        (#{redPacket.id}, #{redPacket.user}, #{redPacket.money}, #{redPacket.number})
+    </insert>
+
+    <update id="updateRedPacket">
+        start transaction;
+
+        select * from red_packet
+        where id = #{redPacketId, jdbcType=VARCHAR} for update;
+
+        update red_packet
+        set money = money - #{money, jdbcType=BIGINT}, number = number - 1
+        where id = #{redPacketId, jdbcType=VARCHAR} and number > 0
+    </update>
+
+    <select id="getRedPacketById" resultType="com.taotao.redis.mysql.entity.RedPacket">
+        select * from red_packet
+        where id = #{redPacketId, jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteRedPacket">
+        delete from red_packet
+        where id = #{redPacketId, jdbcType=VARCHAR}
+    </delete>
+</mapper>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taotao.redis.mysql.mapper.RecordMapper">
+
+    <insert id="addRecord" parameterType="com.taotao.redis.mysql.entity.Record">
+        insert into record(user, redpacket_id, money, operation, time) values
+        (#{record.user}, #{record.redPacketId}, #{record.money}, #{record.operation}, #{record.time})
+    </insert>
+
+</mapper>
